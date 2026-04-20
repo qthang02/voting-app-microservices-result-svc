@@ -32,3 +32,21 @@ jobs:
         tags: |
           thang909/voting-app-microservice-result:latest
           thang909/voting-app-microservice-result:${{ github.sha }}
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v3
+
+    - name: Set up Kubeconfig
+      run: |
+        echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+        echo "KUBECONFIG=./kubeconfig" >> $GITHUB_ENV
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl set image deployment result-deploy result=thang909/voting-app-microservice-result:${{ github.sha }} --namespace=prod
+        kubectl rollout status deploy result-deploy --namespace=prod
