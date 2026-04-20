@@ -12,13 +12,6 @@ jobs:
 
     # 1. Checkout code từ repository
     steps:
-
-    - name: logging
-      run: |
-        echo "Starting Docker Image CI/CD workflow..."
-        echo "Repository: ${{ github.repository }}"
-        echo "Branch: ${{ github.ref }}"
-        echo "Commit SHA: ${{ github.sha }}"
     - name: Checkout code
       uses: actions/checkout@v4
 
@@ -29,13 +22,13 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
-    # # 3. Build và Push trực tiếp lên repo thang909/voting-app-microservice-result
-    # - name: Build and push
-    #   uses: docker/build-push-action@v5
-    #   with:
-    #     context: .
-    #     file: ./Dockerfile
-    #     push: true
-    #     tags: |
-    #       thang909/voting-app-microservice-result:latest
-    #       thang909/voting-app-microservice-result:${{ github.sha }}
+    # 3. Build và Push trực tiếp lên repo Docker Hub 
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: |
+          ${{github.repository}}:latest
+          ${{github.repository}}:${{ github.sha }}
