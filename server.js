@@ -19,9 +19,6 @@ var pgConfig = {
   database: process.env.POSTGRES_DB || 'postgres',
 };
 
-console.log('this is result service');
-
-console.log('Connecting to PostgreSQL at ' + pgConfig.host + ':' + pgConfig.port);
 
 // ============================================
 // Socket.IO
