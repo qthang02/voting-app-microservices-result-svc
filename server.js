@@ -19,6 +19,12 @@ var pgConfig = {
   database: process.env.POSTGRES_DB,
 };
 
+console.log('PostgreSQL configuration:');
+console.log('  Host: ' + pgConfig.host);
+console.log('  Port: ' + pgConfig.port);
+console.log('  User: ' + pgConfig.user);
+console.log('  Database: ' + pgConfig.database);
+
 
 // ============================================
 // Socket.IO
