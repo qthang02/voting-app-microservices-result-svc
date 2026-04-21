@@ -12,11 +12,11 @@ var express = require('express'),
 var port = process.env.RESULT_PORT || process.env.PORT || 80;
 
 var pgConfig = {
-  host: process.env.POSTGRES_HOST || 'db',
-  port: parseInt(process.env.POSTGRES_PORT) || 5432,
-  user: process.env.POSTGRES_USER || 'postgres',
-  password: process.env.POSTGRES_PASSWORD || 'postgres',
-  database: process.env.POSTGRES_DB || 'postgres',
+  host: process.env.POSTGRES_HOST,
+  port: parseInt(process.env.POSTGRES_PORT),
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
 };
 
 
